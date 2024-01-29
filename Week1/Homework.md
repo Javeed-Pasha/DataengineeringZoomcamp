@@ -162,10 +162,8 @@ terraform apply
 
 Paste the output of this command into the homework submission form.
 
+### Answer
+terraform files used 
+* [main.tf](https://github.com/Javeed-Pasha/DataengineeringZoomcamp/blob/main/Week1/main.tf)
+* [variables.tf](https://github.com/Javeed-Pasha/DataengineeringZoomcamp/blob/main/Week1/variables.tf)
 
-## Submitting the solutions
-
-* Form for submitting: https://courses.datatalks.club/de-zoomcamp-2024/homework/hw01
-* You can submit your homework multiple times. In this case, only the last submission will be used. 
-
-Deadline: 29 January, 23:00 CET
