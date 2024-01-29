@@ -40,10 +40,9 @@ What is version of the package *wheel* ?
 - 23.0.1
 - 58.1.0
 
-## Question 2 Answer
-  docker run -it python:3.9 bash 
-   in the docker bash shell run pip list . 
-  the wheel version is 0.42.0
+###  Answer is 0.42.0
+    docker run -it python:3.9 bash 
+     in the docker bash shell run pip list .   
 
 # Prepare Postgres
 
@@ -71,7 +70,11 @@ Remember that `lpep_pickup_datetime` and `lpep_dropoff_datetime` columns are in 
 - 15612
 - 15859
 - 89009
-
+### Answer is 15767
+  ```
+      select count(*) from  public.green_trip_data  
+      where cast(lpep_pickup_datetime as date) = '2019-09-18'
+  ```
 ## Question 4. Longest trip for each day
 
 Which was the pick up day with the longest trip distance?
@@ -83,6 +86,12 @@ Tip: For every trip on a single day, we only care about the trip with the longes
 - 2019-09-16
 - 2019-09-26
 - 2019-09-21
+
+### Answer is 2019-09-26
+  ```
+      select cast(lpep_pickup_datetime as date), max(trip_distance) from  public.green_trip_data group by cast(lpep_pickup_datetime as date)
+order by 2 desc limit 1
+  ```
 
 
 ## Question 5. Three biggest pick up Boroughs
@@ -96,6 +105,16 @@ Which were the 3 pick up Boroughs that had a sum of total_amount superior to 500
 - "Bronx" "Manhattan" "Queens" 
 - "Brooklyn" "Queens" "Staten Island"
 
+### Answer is "Brooklyn" "Manhattan" "Queens"
+  ```
+    select b."Borough", sum(a.total_amount) from  public.green_trip_data a
+    left outer join public.zones b on  a."PULocationID" = b."LocationID"
+    where cast(a.lpep_pickup_datetime as date) ='2019-09-18'
+    and b."Borough" <> 'Unknown'
+    group by  b."Borough"
+    order by 2 desc
+    limit 3
+  ```
 
 ## Question 6. Largest tip
 
@@ -109,7 +128,18 @@ Note: it's not a typo, it's `tip` , not `trip`
 - JFK Airport
 - Long Island City/Queens Plaza
 
-
+### Answer is JFK Airport
+  ```
+    select max(tip_amount),c."Zone"
+    from  public.green_trip_data a 
+    left outer join public.zones b on  a."PULocationID"  = b."LocationID"
+    left outer join public.zones c on  a."DOLocationID"  = c."LocationID"
+    where cast(a.lpep_pickup_datetime as date) between '2019-09-01' and '2019-09-30'
+    and b."Zone" ='Astoria'
+    group by c."Zone"
+    order by 1 desc
+    limit 1
+  ```
 
 ## Terraform
 
