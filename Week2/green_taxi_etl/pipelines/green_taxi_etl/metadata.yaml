@@ -1,0 +1,116 @@
+blocks:
+- all_upstream_blocks_executed: true
+  color: null
+  configuration: {}
+  downstream_blocks:
+  - transform_data
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: extract NY Taxi API DATA
+  retry_config: null
+  status: executed
+  timeout: null
+  type: data_loader
+  upstream_blocks: []
+  uuid: extract_ny_taxi_api_data
+- all_upstream_blocks_executed: true
+  color: null
+  configuration: {}
+  downstream_blocks:
+  - partitioned_parquest_to_gcs
+  - load_to_greentaxi_pg
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: Transform Data
+  retry_config: null
+  status: executed
+  timeout: null
+  type: transformer
+  upstream_blocks:
+  - extract_ny_taxi_api_data
+  uuid: transform_data
+- all_upstream_blocks_executed: true
+  color: null
+  configuration: {}
+  downstream_blocks: []
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: Partitioned_Parquest_To_GCS
+  retry_config: null
+  status: executed
+  timeout: null
+  type: data_exporter
+  upstream_blocks:
+  - transform_data
+  uuid: partitioned_parquest_to_gcs
+- all_upstream_blocks_executed: true
+  color: null
+  configuration: {}
+  downstream_blocks:
+  - golden_rogue
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: Load_to_greenTaxi_pg
+  retry_config: null
+  status: executed
+  timeout: null
+  type: data_exporter
+  upstream_blocks:
+  - transform_data
+  uuid: load_to_greentaxi_pg
+- all_upstream_blocks_executed: true
+  color: null
+  configuration:
+    data_provider: postgres
+    data_provider_profile: dev
+    dbt: {}
+    disable_query_preprocessing: false
+    export_write_policy: append
+    limit: 1000
+    use_raw_sql: true
+  downstream_blocks: []
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: sql
+  name: golden rogue
+  retry_config: null
+  status: updated
+  timeout: null
+  type: data_exporter
+  upstream_blocks:
+  - load_to_greentaxi_pg
+  uuid: golden_rogue
+cache_block_output_in_memory: false
+callbacks: []
+concurrency_config: {}
+conditionals: []
+created_at: '2024-02-04 10:02:11.590930+00:00'
+data_integration: null
+description: null
+executor_config: {}
+executor_count: 1
+executor_type: null
+extensions: {}
+name: green_taxi_etl
+notification_config: {}
+remote_variables_dir: null
+retry_config: {}
+run_pipeline_in_one_process: false
+settings:
+  triggers: null
+spark_config: {}
+tags: []
+type: python
+updated_at: '2024-02-04 16:51:42'
+uuid: green_taxi_etl
+variables_dir: /home/src/mage_data/magic-zoomcamp
+widgets: []
