@@ -27,4 +27,8 @@ What is the estimated amount of data that will be read when this query is execut
     SELECT count( distinct PULocationID )   from  forward-ace-411913.zoomcamp_bigquery.green_taxidata_non_partitoned;
 
 
-Question 3 :
+Question 3. How many records have a fare_amount of 0?
+
+    SELECT count( 1 )   from  forward-ace-411913.zoomcamp_bigquery.green_taxidata_non_partitoned where fare_amount=0
+
+    
