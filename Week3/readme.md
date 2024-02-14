@@ -1,6 +1,8 @@
 
 #SETUP:
 
+Maze Pipeline used to load green taxi data for 2022 . 
+
 ###Create an external table using the Green Taxi Trip Records Data for 2022.
 
     CREATE OR REPLACE EXTERNAL TABLE `forward-ace-411913.zoomcamp_bigquery.external_green_taxidata`
