@@ -18,18 +18,21 @@ Maze Pipeline used to load green taxi data for 2022 .
 
 
 Question 1: What is count of records for the 2022 Green Taxi Data??
+
 Answer :
     SELECT count( 1) FROM `forward-ace-411913.zoomcamp_bigquery.external_green_taxidata` 
 
 
 Question2 : Write a query to count the distinct number of PULocationIDs for the entire dataset on both the tables.
 What is the estimated amount of data that will be read when this query is executed on the External Table and the Table?
+
  Answer :   
     SELECT count( distinct PULocationID )   from `forward-ace-411913.zoomcamp_bigquery.external_green_taxidata`;
     SELECT count( distinct PULocationID )   from  forward-ace-411913.zoomcamp_bigquery.green_taxidata_non_partitoned;
 
 
 Question 3. How many records have a fare_amount of 0?
+
 Answer :
     SELECT count( 1 )   from  forward-ace-411913.zoomcamp_bigquery.green_taxidata_non_partitoned where fare_amount=0
 
